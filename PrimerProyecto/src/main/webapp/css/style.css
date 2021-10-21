@@ -1,0 +1,52 @@
+body{
+    background-image: url("../img/fondo.jpg");
+    background-size: cover;
+}
+
+.cabeza{
+    font-family:sans-serif;
+    text-align: center;
+    font-weight: bolder;
+    font-size:1.5cm;
+    margin-top: 4cm;
+    margin-bottom: 6cm;
+    
+}
+
+.cabeza .logo{
+    width:150px;
+    height:150px;
+    vertical-align:middle;
+}
+
+.iconouser{
+    width:100px;
+    height:100px;
+    margin-top: 75px;
+    float: left;
+    margin-left:150px;
+}
+
+.iconouser:hover{
+    width:90px;
+    height:90px;
+    filter: blur(0.5px);
+}
+
+.menu{
+    width:500px;
+    height:100px;
+}
+.iconohome{
+    width:100px;
+    height:100px;
+    margin-top: 75px;
+    float: left;
+    margin-left:150px;
+}
+
+.iconohome:hover{
+    width:90px;
+    height:90px;
+    filter: blur(0.5px);
+}
