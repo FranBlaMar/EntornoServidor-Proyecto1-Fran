@@ -1,3 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+
+html{
+	font-family: 'Montserrat', Arial, sans-serif;
+}
 body{
     background-image: url("../img/fondo.jpg");
     background-size: cover;
@@ -24,17 +30,17 @@ body{
     height:100px;
     margin-top: 75px;
     float: left;
-    margin-left:150px;
+    margin-left:25%;
 }
 
 .iconouser:hover{
-    width:90px;
-    height:90px;
+    width:95px;
+    height:95px;
     filter: blur(0.5px);
 }
 
 .menu{
-    width:500px;
+    width:100%;
     height:100px;
 }
 .iconohome{
@@ -42,11 +48,57 @@ body{
     height:100px;
     margin-top: 75px;
     float: left;
-    margin-left:150px;
+    margin-left:25%;
 }
 
 .iconohome:hover{
-    width:90px;
-    height:90px;
+    width:95px;
+    height:95px;
     filter: blur(0.5px);
+}
+
+h1{
+	color: #474544;
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: 7px;
+	text-align: center;
+	text-transform: uppercase;
+	border-bottom: solid 2px #474544;
+}
+.cuadrado{
+    border-radius: 1cm;
+    margin-right: 35%;
+    margin-left: 35%;
+    margin-top: 10%;
+    display: block;
+    padding: 1cm;
+    font-family: 'Montserrat', Arial, sans-serif;
+	text-transform: uppercase;
+	background: #F2F3EB;
+	border: solid 4px #474544;
+	
+}
+
+.cuadrado #botonCrearUsuario{
+	background: none;
+	border: solid 2px #474544;
+	color: #474544;
+	font-family: 'Helvetica', Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 0.5cm;
+  	font-weight: bold;
+  	padding: 10px 25px;
+}
+.cuadrado #botonCrearUsuario:hover {
+  background: #474544;
+  color: #F2F3EB;
+}
+input, select{
+
+	line-height: normal;
+	color: #5A5A5A;
+  	background: none;
+  	border: none;
+  	border-bottom: solid 2px #474544;
 }
