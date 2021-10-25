@@ -3,21 +3,21 @@ package beans;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-enum sector{
-	TECNOLOGICO,MEDICINA,EDUCACION,SERVICIOS;
-}
 public class UsuarioBean {
 	private String nombre;
-	private LocalDate fechaNacimiento;
+	private String fechaNacimiento;
+	private LocalDate fechaEnLocalDate;
 	private int edad;
-	private sector trabajo;
+	private String sector;
 	private String email;
 	
+
 	public UsuarioBean() {
 		this.nombre = null;
 		this.fechaNacimiento = null;
+		this.fechaEnLocalDate = null;
 		this.edad = 0;
-		this.trabajo = null;
+		this.sector = null;
 		this.email = null;
 	}
 
@@ -37,26 +37,31 @@ public class UsuarioBean {
 	 * @param fechaNacimiento
 	 */
 	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 		LocalDate cumple= LocalDate.parse(fechaNacimiento);
 		this.edad = (int) ChronoUnit.YEARS.between(cumple,LocalDate.now());
-		this.fechaNacimiento = cumple;
+		this.fechaEnLocalDate = cumple;
 	}
-	public LocalDate getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
+	public LocalDate getFechaEnLocalDate() {
+		return fechaEnLocalDate;
+	}
+	
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	public String getTrabajo() {
-		return trabajo.toString();
+	public String getSector() {
+		return sector;
 	}
 	
 	/**
 	 * Usamos valueOf para obtener el numerado que corresponde al string introducido
 	 * @param trabajo
 	 */
-	public void setTrabajo(String trabajo) {
-		this.trabajo = sector.valueOf(trabajo.toUpperCase());
+	public void setSector(String trabajo) {
+		this.sector = trabajo;
 	}
 	public String getEmail() {
 		return email;

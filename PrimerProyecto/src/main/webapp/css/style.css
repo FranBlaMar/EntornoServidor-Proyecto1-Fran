@@ -3,7 +3,9 @@
 
 html{
 	font-family: 'Montserrat', Arial, sans-serif;
+	font-weight: bolder;
 }
+
 body{
     background-image: url("../img/fondo.jpg");
     background-size: cover;
@@ -102,3 +104,19 @@ input, select{
   	border: none;
   	border-bottom: solid 2px #474544;
 }
+a #error{
+	text-align: center;
+	color: #474544;
+	margin-left: 600px;
+}
+.cumple{
+	margin-top:100px;
+}
+.datosDerecha{
+	position:absolute; 
+	right:0;
+	margin-right: 150px;
+	top:0;
+	margin-top: 70px;
+}
+
