@@ -1,4 +1,4 @@
-package servlets;
+package servlet;
 
 import java.io.*;
 import java.util.HashMap;
@@ -31,19 +31,21 @@ public class Login extends HttpServlet {
 		Users users = new Users();
 		HashMap<String,String> listaUsers =	users.getUsers();
 		//Creamos el writer y la sesion
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession sesion = request.getSession();
 		//Obtenemos los valores de usuario y contraseña introducidos por el cliente
 		String usuario = request.getParameter("usuario");
 		String contraseña = request.getParameter("contraseña");
 		String validarUsuario = listaUsers.get(usuario);
-		if(validarUsuario == contraseña) {
+		
+		if(validarUsuario.equals(contraseña)) {
 			sesion.setAttribute("usuario", usuario);
+			sesion.setAttribute("errorLog","false");
 		}
 		else {
-
+			sesion.setAttribute("errorLog","true");
 		}
-
 	}
 
 	/**
@@ -52,7 +54,6 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-
 	}
 
 }
