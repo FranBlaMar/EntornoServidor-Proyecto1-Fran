@@ -15,7 +15,10 @@ public class Users {
     	users.put("PRUEBA","PRUEBA");
     }
 
-
+    /**
+     * 
+     * @return hashmap de los usuarios
+     */
 	public HashMap<String, String> getUsers() {
 		return users;
 	}
