@@ -1,9 +1,8 @@
 package servlet;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,55 +40,59 @@ public class CatalogoServlet extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		
 		
-		
-		//Obtenemos los valores de usuario y contraseña introducidos por el cliente
-		String usuario = request.getParameter("usuario").toUpperCase();
-		String contrasena = request.getParameter("contrasena").toUpperCase();
-		String validarUsuario = listaUsers.get(usuario);
-		
-		
 		//Creamos el objeto catalogo y le añadimos productos
 		Catalogo c =  new Catalogo();
-		c.anadirProducto(new Producto ("Reloj",15));
-		c.anadirProducto(new Producto ("Gorra",22));
-		c.anadirProducto(new Producto ("Cartera Gucci",130));
-		c.anadirProducto(new Producto ("Anillo plata de ley",38));
 		
-		ArrayList <Producto> lista = c.getListaProductos();
+		HashMap <String,Double> lista = c.getListaProductos();
 		StringBuilder htmlListaProductos = new StringBuilder();
-		Iterator<Producto> it = lista.iterator();
+		Set <String> listaKeys = lista.keySet();
 		
-		while (it.hasNext()) {
-			Producto p = it.next();
-			String nombre = p.getNombre();
-			int precio = p.getPrecio();
-			htmlListaProductos.append("<label for=\"" + nombre + "\"> "+nombre + ", " + precio + "eu </label>\n"
-					+ "<input type=\"radio\" id = \"" + nombre +"\"value=\"" +precio+ "\" name=\"producto\" >\n<br>"); 
+		for (String key : listaKeys) {
+			String nombreProducto = key;
+			Double precioProducto = lista.get(key);
+			htmlListaProductos.append("<div id=\""+ nombreProducto + "\">"
+					+ "<label for=\""+nombreProducto+"\"> "+ nombreProducto +",  Precio: "+ precioProducto + " eu <br>"
+					+ "            <img src=\"img/"+nombreProducto+".jpg\"/> <br>"
+					+ "            <input type=\"number\" name=\""+nombreProducto+"\"/ placeholder=\"Introduzca la cantidad\"> <br>"
+					+ "        </label>"
+					+ "</div>"); 
 		}
 		
-		//Si la contraseña obtenida del usuario introducido no es nula y coincide con la contraseña introducida por el usuario
-		//Guardamos el usuario en la sesion y mostramos el catalogo
-		if(validarUsuario != null && validarUsuario.equals(contrasena)) {
-			sesion.setAttribute("usuario", usuario);
-			sesion.setAttribute("errorLog","false");
-			out.println("<html> \n"
-					+ "<head>\n"
-					+ "	<meta charset=\"UTF-8\">\n"
-					+ "		<title>Catalogo</title>\n"
-					+ "	</head>\n"
-					+ "<body>\n"
-					+ "<p>hola</p>"
-					+ "<form action=\"/CarroDeLaCompra/resumen\">"
-					+ htmlListaProductos
-					+ "</form>"
-					+ "</body>\n"
-					+ "</html>");
-			System.out.println(htmlListaProductos);
-		}
-		else {
-			sesion.setAttribute("errorLog","true");
+		
+		
+				
+		
+		if (sesion.isNew() || sesion.getAttribute("usuario") == null) {
 			response.sendRedirect("/CarroDeLaCompra/HTML/Login.jsp");
 		}
+		
+			//Obtenemos los valores de usuario y contraseña introducidos por el cliente
+			String usuario = request.getParameter("usuario").toUpperCase();
+			String contrasena = request.getParameter("contrasena").toUpperCase();
+			String validarUsuario = listaUsers.get(usuario);
+			//Si la contraseña obtenida del usuario introducido no es nula y coincide con la contraseña introducida por el usuario
+			//Guardamos el usuario en la sesion y mostramos el catalogo
+			if(validarUsuario != null && validarUsuario.equals(contrasena)) {
+				sesion.setAttribute("usuario", usuario);
+				sesion.setAttribute("errorLog","false");
+				out.println("<html> \n"
+						+ "<head>\n"
+						+ "	<meta charset=\"UTF-8\">\n"
+						+ "		<title>Catalogo</title>\n"
+						+ "<link rel=\"styleSheet\" type=\"text/css\" href=\"css/style.css\">"
+						+ "	</head>\n"
+						+ "<body>\n"
+						+ "<form action=\"/CarroDeLaCompra/resumen\">"
+						+ htmlListaProductos
+						+ "<input type=\"submit\" class=\"boton\" value=\"Comprar\"/>"
+						+ "</form>"
+						+ "</body>\n"
+						+ "</html>");
+			}
+			else {
+				sesion.setAttribute("errorLog","true");
+				response.sendRedirect("/CarroDeLaCompra/HTML/Login.jsp");
+			}
 		
 		
 	}
