@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/catalogo")
 public class CatalogoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,7 +41,7 @@ public class CatalogoServlet extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		
 		
-		//Creamos el objeto catalogo y le añadimos productos
+		//Creamos el objeto catalogo
 		Catalogo c =  new Catalogo();
 		
 		HashMap <String,Double> lista = c.getListaProductos();
@@ -58,14 +59,12 @@ public class CatalogoServlet extends HttpServlet {
 					+ "</div>"); 
 		}
 		
+
 		
-		
-				
-		
-		if (sesion.isNew() || sesion.getAttribute("usuario") == null) {
+		if (request.getParameter("usuario") == null && !sesion.isNew()) {
 			response.sendRedirect("/CarroDeLaCompra/HTML/Login.jsp");
 		}
-		
+		else {
 			//Obtenemos los valores de usuario y contraseña introducidos por el cliente
 			String usuario = request.getParameter("usuario").toUpperCase();
 			String contrasena = request.getParameter("contrasena").toUpperCase();
@@ -82,7 +81,7 @@ public class CatalogoServlet extends HttpServlet {
 						+ "<link rel=\"styleSheet\" type=\"text/css\" href=\"css/style.css\">"
 						+ "	</head>\n"
 						+ "<body>\n"
-						+ "<form action=\"/CarroDeLaCompra/resumen\">"
+						+ "<form action=\"/CarroDeLaCompra/Resumen\">"
 						+ htmlListaProductos
 						+ "<input type=\"submit\" class=\"boton\" value=\"Comprar\"/>"
 						+ "</form>"
@@ -93,7 +92,7 @@ public class CatalogoServlet extends HttpServlet {
 				sesion.setAttribute("errorLog","true");
 				response.sendRedirect("/CarroDeLaCompra/HTML/Login.jsp");
 			}
-		
+		}
 		
 	}
 
